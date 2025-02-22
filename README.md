@@ -20,12 +20,19 @@ Catme Excel to JSON is a Python-based tool designed to convert large Excel or CS
    cd catme-excel-to-json
    ```
 
-2. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+2. Install the required dependencies manually (we intentionally do not include a `requirements.txt` file):
+   - **Python 3.8 or higher** must be installed on your system.
+   - Install the following Python packages using `pip`:
+     ```bash
+     pip install pandas openpyxl tqdm psutil sqlite3
+     ```
+     - `pandas`: For reading and processing Excel/CSV files.
+     - `openpyxl`: To support `.xlsx` files.
+     - `tqdm`: For progress bars during processing.
+     - `psutil`: For system resource monitoring.
+     - `sqlite3`: For checkpointing and saving progress.
 
-3. Ensure you have Python 3.8 or higher installed.
+3. Ensure that you have sufficient disk space for temporary files and logs.
 
 ## Usage
 
@@ -71,6 +78,31 @@ If the process is interrupted, it can be resumed from the last checkpoint. Simpl
 ## Logging
 
 Logs are stored in the `logs/` directory. Each process generates its own log file with a unique identifier (PID). Logs include timestamps, process IDs, and detailed messages for debugging.
+
+## Principles of AI-Compatible Development
+
+This program adheres to several key principles of AI-compatible development to ensure scalability, maintainability, and ease of integration with AI systems:
+
+1. **Explicit Context Management**:
+   - All functions and methods explicitly pass their dependencies (e.g., file paths, configurations) rather than relying on implicit global state. This makes the code easier to analyze and debug by AI systems.
+
+2. **Stateless Design**:
+   - Core processing functions (e.g., `process_chunk_function`) are stateless and self-contained. They create their own instances of dependencies (e.g., readers) instead of relying on shared state. This eliminates serialization issues and ensures compatibility with multiprocessing frameworks.
+
+3. **Modularity and Separation of Concerns**:
+   - The code is divided into clear modules, each responsible for a specific task (e.g., reading files, writing results, monitoring resources). This separation simplifies maintenance and allows AI tools to focus on specific parts of the codebase.
+
+4. **Error Handling and Graceful Degradation**:
+   - The program is designed to handle interruptions gracefully, ensuring no data loss. Checkpointing and logging mechanisms allow the system to recover from failures and provide detailed diagnostics for troubleshooting.
+
+5. **Scalability and Parallelism**:
+   - The use of `ProcessPoolExecutor` and chunk-based processing ensures that the program can scale to handle large datasets efficiently. Resource monitoring prevents overloading the system, making it suitable for deployment in diverse environments.
+
+6. **Human-Readable Documentation**:
+   - The code includes comprehensive inline documentation and type annotations, making it easier for both humans and AI systems to understand the purpose and behavior of each component.
+
+7. **Avoidance of Implicit Dependencies**:
+   - The program avoids reliance on external configuration files like `requirements.txt`, allowing users to manually install dependencies. This approach ensures transparency and flexibility in dependency management.
 
 ## Contributing
 
