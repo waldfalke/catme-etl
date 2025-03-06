@@ -1,6 +1,6 @@
-# Catme Excel to JSON
+# Catme ETL
 
-Catme Excel to JSON is a Python-based tool designed to convert large Excel or CSV files into JSON format efficiently. The tool supports multi-threaded processing, checkpointing, and resource monitoring to ensure smooth operation even with large datasets.
+Catme ETL is a Python-based tool designed to convert large Excel or CSV files into JSON format efficiently. The tool supports multi-threaded processing, checkpointing, and resource monitoring to ensure smooth operation even with large datasets.
 
 ## Features
 
@@ -16,8 +16,8 @@ Catme Excel to JSON is a Python-based tool designed to convert large Excel or CS
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/waldfalke/catme-excel-to-json.git
-   cd catme-excel-to-json
+   git clone https://github.com/waldfalke/catme-etl.git
+   cd catme-etl
    ```
 
 2. Install the required dependencies manually (we intentionally do not include a `requirements.txt` file):
